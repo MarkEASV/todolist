@@ -15,7 +15,7 @@ const completedList = document.querySelector('.completedList') as HTMLUListEleme
 const completedContainer = completedList.parentElement as HTMLElement;
 const errorMessage = document.getElementById('errorMessage') as HTMLElement;
 
-// Add "Clear Completed" button under completed h2
+// Option 2: Add a button to clear all completed todos
 const clearCompletedBtn = document.createElement('button');
 clearCompletedBtn.textContent = 'Clear all Completed';
 clearCompletedBtn.className = 'clearCompletedButton'
@@ -26,6 +26,7 @@ clearCompletedBtn.addEventListener('click', () => {
   renderTodos();
 });
 
+//Option 6: Due Date for Todos:
 const addTodo = (description: string) => {
   const newTodo: Todo = {
     id: Date.now(),
@@ -115,3 +116,31 @@ const hideError = () => {
 
 hideError();
 renderTodos();
+
+// Option 11: Add a button to toggle between light and dark modes.
+const switchContainer = document.createElement('label');
+switchContainer.className = 'switch';
+
+const switchInput = document.createElement('input');
+switchInput.type = 'checkbox';
+
+const slider = document.createElement('span');
+slider.className = 'slider';
+
+const knob = document.createElement('span');
+knob.className = 'knob';
+
+slider.appendChild(knob);
+switchContainer.appendChild(switchInput);
+switchContainer.appendChild(slider);
+
+const switchWrapper = document.createElement('div');
+switchWrapper.className = 'switchWrapper';
+switchWrapper.appendChild(switchContainer);
+
+const pageContainer = document.querySelector('.pageContainer');
+document.body.insertBefore(switchWrapper, pageContainer);
+
+switchInput.addEventListener('change', () => {
+  document.body.classList.toggle('darkMode', switchInput.checked);
+});
