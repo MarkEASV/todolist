@@ -1,0 +1,100 @@
+:root {
+  --font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --body-background-color: #f4f4f4;
+  --container-background-color: #ffffff;
+  --container-padding: 20px;
+  --container-border-radius: 10px;
+  --container-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --primary-color: #28a745;
+  --danger-color: #dc3545;
+  --text-color: #333;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--body-background-color);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background: var(--container-background-color);
+  padding: var(--container-padding);
+  border-radius: var(--container-border-radius);
+  box-shadow: var(--container-box-shadow);
+  width: 360px;
+  text-align: center;
+}
+
+.todoForm {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.todoForm input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.todoForm input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.todoForm button {
+  padding: 10px 14px;
+  border: none;
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.todoForm button:hover {
+  background: #218838;
+}
+
+.todoList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todoItem {
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  transition: background 0.2s;
+}
+
+.todoItem:hover {
+  background: #f1f1f1;
+}
+
+.todoItem button {
+  background: var(--danger-color);
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.todoItem button:hover {
+  background: #b02a37;
+}
