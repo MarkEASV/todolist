@@ -5,9 +5,11 @@
   --container-padding: 20px;
   --container-border-radius: 10px;
   --container-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --container-width: 360px;
   --primary-color: #28a745;
   --danger-color: #dc3545;
   --text-color: #333;
+  --completed-color: #666;
 }
 
 body {
@@ -21,13 +23,33 @@ body {
   height: 100vh;
 }
 
+.pageContainer {
+  display: flex;
+  gap: 25px;
+  align-items: flex-start;
+}
+
 .container {
   background: var(--container-background-color);
   padding: var(--container-padding);
   border-radius: var(--container-border-radius);
   box-shadow: var(--container-box-shadow);
-  width: 360px;
+}
+
+.todoContainer {
+  width: 500px;
   text-align: center;
+}
+
+.completedContainer {
+  width: 300px;
+  background: #f9f9f9;
+}
+
+.completedContainer h2 {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 10px;
 }
 
 .todoForm {
@@ -64,13 +86,15 @@ body {
   background: #218838;
 }
 
-.todoList {
+.todoList,
+.completedList {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.todoItem {
+.todoItem,
+.completedList li {
   background: #f9f9f9;
   padding: 10px;
   border-radius: 5px;
@@ -78,14 +102,23 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.2s;
 }
 
 .todoItem:hover {
   background: #f1f1f1;
 }
 
-.todoItem button {
+.completedList li {
+  background: #e6ffe6;
+  color: var(--completed-color);
+}
+
+.completedList li span {
+  text-decoration: line-through;
+}
+
+.completedList button {
   background: var(--danger-color);
   color: white;
   border: none;
@@ -95,6 +128,17 @@ body {
   transition: background 0.2s;
 }
 
-.todoItem button:hover {
+.completedList button:hover {
   background: #b02a37;
+}
+
+.clearCompletedButton{
+  margin: 10px 0 10px 0;
+  padding: 8px 12px;
+  border: none;
+  background: var(--danger-color);
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s;
 }

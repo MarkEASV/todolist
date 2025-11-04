@@ -1,4 +1,4 @@
-import './style.css';
+import '../src/style.css';
 
 interface Todo {
   id: number;
@@ -11,7 +11,20 @@ let todos: Todo[] = [];
 const todoInput = document.getElementById('todoInput') as HTMLInputElement;
 const todoForm = document.querySelector('.todoForm') as HTMLFormElement;
 const todoList = document.querySelector('.todoList') as HTMLUListElement;
+const completedList = document.querySelector('.completedList') as HTMLUListElement;
+const completedContainer = completedList.parentElement as HTMLElement;
 const errorMessage = document.getElementById('errorMessage') as HTMLElement;
+
+// Add "Clear Completed" button under completed h2
+const clearCompletedBtn = document.createElement('button');
+clearCompletedBtn.textContent = 'Clear all Completed';
+clearCompletedBtn.className = 'clearCompletedButton'
+completedContainer.insertBefore(clearCompletedBtn, completedList);
+
+clearCompletedBtn.addEventListener('click', () => {
+  todos = todos.filter(todo => !todo.completed);
+  renderTodos();
+});
 
 const addTodo = (description: string) => {
   const newTodo: Todo = {
@@ -39,6 +52,7 @@ todoForm.addEventListener('submit', (event: Event) => {
 
 const renderTodos = () => {
   todoList.innerHTML = '';
+  completedList.innerHTML = '';
 
   todos.forEach((todo) => {
     const li = document.createElement('li');
@@ -54,7 +68,11 @@ const renderTodos = () => {
     addRemoveButtonListener(li, todo.id);
     addCheckboxListener(li, todo.id);
 
-    todoList.appendChild(li);
+    if (todo.completed) {
+      completedList.appendChild(li);
+    } else {
+      todoList.appendChild(li);
+    }
   });
 };
 
