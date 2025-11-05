@@ -1,4 +1,4 @@
-import '../src/style.css';
+import './style.css';
 
 interface Todo {
   id: number;
@@ -13,21 +13,16 @@ const todoInput = document.getElementById('todoInput') as HTMLInputElement;
 const todoForm = document.querySelector('.todoForm') as HTMLFormElement;
 const todoList = document.querySelector('.todoList') as HTMLUListElement;
 const completedList = document.querySelector('.completedList') as HTMLUListElement;
-const completedContainer = completedList.parentElement as HTMLElement;
 const errorMessage = document.getElementById('errorMessage') as HTMLElement;
 
-// Option 2: Add a button to clear all completed todos
-const clearCompletedBtn = document.createElement('button');
-clearCompletedBtn.textContent = 'Clear all Completed';
-clearCompletedBtn.className = 'clearCompletedButton';
-completedContainer.insertBefore(clearCompletedBtn, completedList);
+// Option 6: Due Date for Todos
+const dateInput = document.createElement('input');
+dateInput.type = 'date';
+dateInput.id = 'todoDate';
+dateInput.className = 'todoDateInput';
+todoForm.insertBefore(dateInput, todoForm.lastElementChild);
 
-clearCompletedBtn.addEventListener('click', () => {
-  todos = todos.filter(todo => !todo.completed);
-  renderTodos();
-});
-
-const addTodo = (description: string) => {
+const addTodo = (description: string, dueDate: string) => {
   const newTodo: Todo = {
     id: Date.now(),
     description,
@@ -128,7 +123,9 @@ const hideError = () => {
 hideError();
 renderTodos();
 
-// Option 11: Add a button to toggle between light and dark modes.
+
+
+// Option 11
 const switchContainer = document.createElement('label');
 switchContainer.className = 'switch';
 
