@@ -1,0 +1,40 @@
+name: TeamWorkflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  integration-delivery:
+    runs-on: ubuntu-22.04
+    environment: Test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: latest
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Project
+        run: npm run build
+
+      - name: FTP delivery
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: linux90.unoeuro.com
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: test/todo/
+          local-dir: dist/
+
+      - name: Run TestCafe Tests
+        uses: DevExpress/testcafe-action@latest
+        with:
+          args: "chrome test/*"
