@@ -3,19 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simple Todo App</title>
+  <title>Todo App</title>
+  <link rel="stylesheet" href="./src/style.css">
 </head>
 <body>
-  <div class="container">
-    <h2>My ToDo list</h2>
-    <form class="todoForm">
-      <input type="text" id="todoInput" placeholder="Add a new todo..." />
-      <button type="submit">Add</button>
-    </form>
-    <p id="errorMessage"></p>
-    <ul class="todoList"></ul>
-  </div>
+  <div class="pageContainer">
+    <div class="container todoContainer">
+      <h2>My Todo list</h2>
+      <form class="todoForm">
+        <input type="text" id="todoInput" placeholder="Add a new todo..." />
+        <button type="submit">Add</button>
+      </form>
+      <p id="errorMessage"></p>
+      <ul class="todoList"></ul>
+    </div>
 
-  <script type="module" src="../src/main.ts"></script>
+    <div class="container completedContainer">
+      <h2>Completed</h2>
+      <ul class="completedList"></ul>
+    </div>
+  </div>
+  <script type="module" src="./src/main.ts"></script>
 </body>
 </html>
