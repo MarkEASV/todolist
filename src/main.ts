@@ -4,6 +4,7 @@ interface Todo {
   id: number;
   description: string;
   completed: boolean;
+  dueDate?: string;
 }
 
 let todos: Todo[] = [];
@@ -18,7 +19,7 @@ const errorMessage = document.getElementById('errorMessage') as HTMLElement;
 // Option 2: Add a button to clear all completed todos
 const clearCompletedBtn = document.createElement('button');
 clearCompletedBtn.textContent = 'Clear all Completed';
-clearCompletedBtn.className = 'clearCompletedButton'
+clearCompletedBtn.className = 'clearCompletedButton';
 completedContainer.insertBefore(clearCompletedBtn, completedList);
 
 clearCompletedBtn.addEventListener('click', () => {
@@ -26,12 +27,12 @@ clearCompletedBtn.addEventListener('click', () => {
   renderTodos();
 });
 
-//Option 6: Due Date for Todos:
 const addTodo = (description: string) => {
   const newTodo: Todo = {
     id: Date.now(),
     description,
-    completed: false
+    completed: false,
+    dueDate,
   };
   todos.push(newTodo);
   renderTodos();
@@ -40,6 +41,7 @@ const addTodo = (description: string) => {
 todoForm.addEventListener('submit', (event: Event) => {
   event.preventDefault();
   const description = todoInput.value.trim();
+  const dueDate = dateInput.value;
 
   if (description === '') {
     showError('Please enter a todo.');
@@ -47,8 +49,9 @@ todoForm.addEventListener('submit', (event: Event) => {
   }
 
   hideError();
-  addTodo(description);
+  addTodo(description, dueDate);
   todoInput.value = '';
+  dateInput.value = '';
 });
 
 const renderTodos = () => {
@@ -58,11 +61,19 @@ const renderTodos = () => {
   todos.forEach((todo) => {
     const li = document.createElement('li');
     li.className = 'todoItem';
+
+    const isOverdue =
+      todo.dueDate && !todo.completed && new Date(todo.dueDate) < new Date();
+
     li.innerHTML = `
       <input type="checkbox" ${todo.completed ? 'checked' : ''}>
-      <span style="text-decoration:${todo.completed ? 'line-through' : 'none'}">
-        ${todo.description}
-      </span>
+      <div class="todoInfo">
+        <span style="text-decoration:${todo.completed ? 'line-through' : 'none'};
+        color:${isOverdue ? 'var(--danger-color)' : 'var(--text-color)'}">
+          ${todo.description}
+        </span>
+        ${todo.dueDate ? `<small>Due: ${todo.dueDate}</small>` : ''}
+      </div>
       <button>Remove</button>
     `;
 
