@@ -38,15 +38,24 @@ jobs:
         with:
           args: "chrome:headless test/*"
 
-  live-deployment:
+      - name: Store artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist/
+
+  deployment:
     needs: integration-delivery
     runs-on: ubuntu-22.04
     environment: live
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: FTP delivery (Live)
+      - name: Load artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist/
+          
+      - name: FTP deploy
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server:  ${{ vars.FTP_SERVER }}
