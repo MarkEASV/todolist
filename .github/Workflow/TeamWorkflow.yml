@@ -8,7 +8,7 @@ on:
 jobs:
   integration-delivery:
     runs-on: ubuntu-latest
-    enviroment: Test
+    environment: Test
     defaults:
       run:
         working-directory: todolistexam
