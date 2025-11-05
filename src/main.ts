@@ -62,7 +62,7 @@ const renderTodos = () => {
       todo.dueDate && !todo.completed && new Date(todo.dueDate) < new Date();
 
     li.innerHTML = `
-      <input type="checkbox" ${todo.completed ? 'checked' : ''}>
+      <input type="checkbox" id="checkBox" ${todo.completed ? 'checked' : ''}>
       <div class="todoInfo">
         <span style="text-decoration:${todo.completed ? 'line-through' : 'none'};
         color:${isOverdue ? 'var(--danger-color)' : 'var(--text-color)'}">

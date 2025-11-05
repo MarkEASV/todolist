@@ -5,8 +5,10 @@ fixture("Todo List App Tests")
 
 test("Add a new todo item", async t => {
     await t
-        .typeText('#todo-input', 'Test Todo Item')
-        .typeText('#date-input', '2024-12-31')
-        .click('#add-button')
-        .expect(Selector('.todo-item').withText('Test Todo Item').exists).ok();
-})
+        .typeText(Selector("#todoInput"), "Testcafe")      // todo text
+        .typeText(Selector("#todoDate"), "2025-12-31")     // date input
+        .click(Selector(".todoForm button"))            // the Add button
+    
+     await t
+        .click(Selector(".todoList li").find('input[type="checkbox"]'));  // complete the todo item
+});

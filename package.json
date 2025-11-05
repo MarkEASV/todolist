@@ -8,8 +8,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
-  "dependencies": {},
   "devDependencies": {
+    "testcafe": "^3.7.2",
     "typescript": "~5.8.3",
     "vite": "^7.1.7"
   }
