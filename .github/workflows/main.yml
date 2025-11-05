@@ -27,7 +27,7 @@ jobs:
       - name: FTP delivery
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
-          server: ftp://domainjutsugojo.dk:wgFA462thfEdbBe9GrHz@linux90.unoeuro.com/
+          server: linux90.unoeuro.com
           port: 21
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
