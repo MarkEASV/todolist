@@ -49,6 +49,7 @@ todoForm.addEventListener('submit', (event: Event) => {
   dateInput.value = '';
 });
 
+//Option 4: Delete al button
 const renderTodos = () => {
   todoList.innerHTML = '';
   completedList.innerHTML = '';
@@ -125,7 +126,7 @@ renderTodos();
 
 
 
-// Option 11
+// Option 11: Dark mode
 const switchContainer = document.createElement('label');
 switchContainer.className = 'switch';
 
