@@ -27,10 +27,11 @@ jobs:
       - name: FTP delivery
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
-          server: 21
+          server: ftp.yourdomain.com
+          port: 21
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: dist/
-          server-dir: test/todo
+          server-dir: test/todo/
 
       
