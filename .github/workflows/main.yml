@@ -9,7 +9,6 @@ jobs:
   integration-delivery:
     runs-on: ubuntu-22.04
     environment: Test
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -25,7 +24,7 @@ jobs:
       - name: Build Project
         run: npm run build
 
-      - name: FTP delivery
+      - name: FTP delivery (Test)
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: linux90.unoeuro.com
@@ -37,4 +36,21 @@ jobs:
       - name: Run TestCafe Tests
         uses: DevExpress/testcafe-action@latest
         with:
-          args: "chrome test/*"
+          args: "chrome:headless test/*"
+
+  live-deployment:
+    needs: integration-delivery
+    runs-on: ubuntu-22.04
+    environment: live
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: FTP delivery (Live)
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server:  ${{ vars.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: live/todo/
+          local-dir: dist/
